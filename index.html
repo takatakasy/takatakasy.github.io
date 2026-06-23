@@ -1,46 +1,347 @@
 <!doctype html>
 <html lang="ja">
 <head>
-  <meta name="google-adsense-account" content="ca-pub-5177905648858551">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- この下にAdSense画面でコピーしたコードを貼り付ける -->
-  
-  <title>広告タグ検証サイト</title>
+<meta name="google-adsense-account" content="ca-pub-5177905648858551">
+
+  <title>Takeshyのメモ帳</title>
+  <meta name="description" content="Web、広告、セキュリティ、日々の気づきをまとめる個人メモサイトです。">
 
   <style>
+    :root {
+      --text: #1f2937;
+      --sub: #667085;
+      --line: #d9dee7;
+      --bg: #f4f7fb;
+      --card: #ffffff;
+      --accent: #2457a7;
+      --accent-soft: #eaf1fb;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
     body {
-      max-width: 800px;
-      margin: 40px auto;
-      padding: 0 20px;
-      font-family: sans-serif;
-      line-height: 1.7;
+      margin: 0;
+      font-family:
+        -apple-system, BlinkMacSystemFont, "Segoe UI",
+        "Noto Sans JP", "Yu Gothic", Meiryo, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.8;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .site-header {
+      background: var(--card);
+      border-bottom: 1px solid var(--line);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .header-inner {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 18px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .site-title {
+      font-size: 1.55rem;
+      font-weight: 800;
+      letter-spacing: .02em;
+    }
+
+    .site-title span {
+      color: var(--accent);
+    }
+
+    nav {
+      display: flex;
+      gap: 20px;
+      font-size: .95rem;
+      color: var(--sub);
+    }
+
+    .hero {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 64px 24px 34px;
+    }
+
+    .hero-box {
+      background: linear-gradient(135deg, #ffffff, #edf4ff);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 48px;
+      box-shadow: 0 12px 30px rgba(28, 54, 92, .08);
+    }
+
+    .hero h1 {
+      margin: 0 0 14px;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      line-height: 1.25;
+    }
+
+    .hero p {
+      margin: 0;
+      max-width: 720px;
+      color: var(--sub);
+      font-size: 1.06rem;
+    }
+
+    .main {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0 24px 64px;
+    }
+
+    .section-title {
+      margin: 38px 0 18px;
+      font-size: 1.5rem;
+    }
+
+    .intro-grid,
+    .article-grid {
+      display: grid;
+      gap: 22px;
+    }
+
+    .intro-grid {
+      grid-template-columns: 2fr 1fr;
+    }
+
+    .article-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 26px;
+      box-shadow: 0 8px 22px rgba(28, 54, 92, .05);
+    }
+
+    .card h2,
+    .card h3 {
+      margin-top: 0;
+      line-height: 1.45;
+    }
+
+    .card p {
+      color: var(--sub);
+      margin-bottom: 0;
+    }
+
+    .tag {
+      display: inline-block;
+      margin-bottom: 12px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-size: .82rem;
+      font-weight: 700;
+    }
+
+    .ad-section {
+      margin-top: 42px;
+    }
+
+    .ad-note {
+      margin: -8px 0 18px;
+      color: var(--sub);
+      font-size: .9rem;
+    }
+
+    .ad-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
     }
 
     .ad-slot {
-      width: 300px;
-      height: 250px;
-      border: 2px dashed #999;
+      min-height: 280px;
+      background: #fafafa;
+      border: 2px dashed #a7adb7;
+      border-radius: 12px;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
-      background: #f5f5f5;
+      text-align: center;
+      color: #727985;
+      padding: 20px;
+    }
+
+    .ad-slot strong {
+      display: block;
+      font-size: 1.2rem;
+      color: #434a54;
+      margin-bottom: 5px;
+    }
+
+    .profile-list {
+      margin: 14px 0 0;
+      padding-left: 1.2em;
+      color: var(--sub);
+    }
+
+    footer {
+      border-top: 1px solid var(--line);
+      background: var(--card);
+    }
+
+    .footer-inner {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 28px 24px;
+      color: var(--sub);
+      font-size: .9rem;
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 900px) {
+      .intro-grid,
+      .article-grid,
+      .ad-grid {
+        grid-template-columns: 1fr;
+      }
+
+      nav {
+        display: none;
+      }
+
+      .hero-box {
+        padding: 34px 26px;
+      }
+
+      .ad-slot {
+        min-height: 250px;
+      }
     }
   </style>
 </head>
 
 <body>
-  <h1>広告タグ検証サイト</h1>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="site-title" href="#"><span>Takeshy</span>のメモ帳</a>
+      <nav aria-label="メインメニュー">
+        <a href="#about">このサイトについて</a>
+        <a href="#notes">最近のメモ</a>
+        <a href="#ads">広告</a>
+      </nav>
+    </div>
+  </header>
 
-  <p>
-    Google AdSenseおよびGoogle Ad Managerの検証用ページです。
-  </p>
+  <section class="hero">
+    <div class="hero-box">
+      <h1>Takeshyのメモ帳</h1>
+      <p>
+        Web、オンライン広告、サイバーセキュリティ、仕事で調べたことなどを、
+        あとで読み返せるように整理している個人メモサイトです。
+      </p>
+    </div>
+  </section>
 
-  <h2>広告枠</h2>
+  <main class="main">
+    <section id="about" class="intro-grid">
+      <article class="card">
+        <span class="tag">ABOUT</span>
+        <h2>このサイトについて</h2>
+        <p>
+          日々の調査や検証で得た気づきを、専門用語をできるだけかみ砕きながら記録しています。
+          内容は随時更新し、古くなった情報は見直していく予定です。
+        </p>
+      </article>
 
-  <div class="ad-slot">
-    300 × 250 広告枠
-  </div>
+      <aside class="card">
+        <span class="tag">PROFILE</span>
+        <h2>Takeshy</h2>
+        <ul class="profile-list">
+          <li>Webと広告技術を勉強中</li>
+          <li>セキュリティ情報の収集が趣味</li>
+          <li>気になったことを深掘りするタイプ</li>
+        </ul>
+      </aside>
+    </section>
+
+    <section id="notes">
+      <h2 class="section-title">最近のメモ</h2>
+
+      <div class="article-grid">
+        <article class="card">
+          <span class="tag">WEB</span>
+          <h3>静的HTMLサイトを公開してみた</h3>
+          <p>
+            GitHub Pagesを使い、HTMLファイルだけでサイトを公開するまでの流れを整理しました。
+          </p>
+        </article>
+
+        <article class="card">
+          <span class="tag">AD TECH</span>
+          <h3>Google Ad Managerとは何か</h3>
+          <p>
+            広告枠、広告タグ、配信管理という3つの観点から、仕組みを簡単にまとめています。
+          </p>
+        </article>
+
+        <article class="card">
+          <span class="tag">SECURITY</span>
+          <h3>Webサイトを見るときの確認ポイント</h3>
+          <p>
+            HTTPS、証明書、外部スクリプトなど、初心者でも確認しやすい項目をメモしています。
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section id="ads" class="ad-section">
+      <h2 class="section-title">広告</h2>
+      <p class="ad-note">
+        現在は広告掲載の検証中です。以下の枠は表示位置を確認するための仮スペースです。
+      </p>
+
+      <div class="ad-grid">
+        <div class="ad-slot" id="ad-slot-1">
+          <strong>広告枠 1</strong>
+          300 × 250 など
+        </div>
+
+        <div class="ad-slot" id="ad-slot-2">
+          <strong>広告枠 2</strong>
+          300 × 250 など
+        </div>
+
+        <div class="ad-slot" id="ad-slot-3">
+          <strong>広告枠 3</strong>
+          300 × 250 など
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <div>© 2026 Takeshyのメモ帳</div>
+      <div>このサイトは個人による学習・検証用サイトです。</div>
+    </div>
+  </footer>
 </body>
 </html>
